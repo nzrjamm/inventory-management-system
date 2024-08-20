@@ -1,0 +1,45 @@
+{% extends "invApp/layout.html" %}
+
+{% block content %}
+<h1 class="text-center">Products</h1>
+
+<!-- Daily Product Totals -->
+<h3 class="text-center my-4">Daily Product Totals</h3>
+<ul class="list-group mb-4">
+    {% for daily in daily_totals %}
+        <li class="list-group-item">
+            {{ daily.date_added }}: {{ daily.total }} products
+        </li>
+    {% endfor %}
+</ul>
+
+<!-- Products Table -->
+<table class="table table-bordered table-striped text-center">
+ <thead class="thead-dark">
+    <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Product Quantity</th>
+        <th>Product Supplier</th>
+        <th>Actions</th>
+    </tr>
+ </thead>
+ <tbody>
+     {% for product in products %}
+     <tr>
+        <td>{{ product.product_id }}</td>
+        <td>{{ product.product_name }}</td>
+        <td>{{ product.product_price }}</td>
+        <td>{{ product.product_quantity }}</td>
+        <td>{{ product.product_supplier }}</td>
+        <td>
+            <a href="{% url 'product_update' product.product_id %}" class="btn btn-warning">Update</a>
+            <a href="{% url 'product_delete' product.product_id %}" class="btn btn-danger">Delete</a>
+        </td>
+     </tr>
+     {% endfor %}
+ </tbody>
+</table>  
+
+{% endblock content %}
